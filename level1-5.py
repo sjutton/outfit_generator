@@ -14,9 +14,9 @@ def cleanup(lista, dictionary, vattentätQuiz, värmeQuiz):
 
 def quiz():
     svar = input("Ska outfiten vara vattentät? ja/nej")
-    if svar == "ja":
+    if svar == "j":
         vattentät = True
-    elif svar == "nej":
+    elif svar == "n":
         vattentät = False
     
     svar = input("Vilken värme ska outfiten vara anpassad för? (h)ot/(c)old")
@@ -35,20 +35,20 @@ def quiz():
 
 
 def generator(lista):
-    if len(lista) != 1:
+    if len(lista) > 1:
         index = random.randint(0, (len(lista)-1))
         choosen = lista[index]
-    else:
+    elif len(lista) == 1:
         choosen = lista[0]
-    
+    else: choosen = "tomt"
     return choosen
 
 
 def wardrobe():
     tröjor = {
         "tshirt":{"vattentät":False, "värme":"hot"},
-        "hoodie":{"vattentät":False, "värme":"cold"}
-        "linne":{"vattentät":False, "värme":"hot"}
+        "hoodie":{"vattentät":False, "värme":"cold"},
+        "linne":{"vattentät":False, "värme":"hot"},
         "croptop":{"vattentät":False, "värme":"hot"}
      }
     byxor = {
@@ -64,17 +64,17 @@ def wardrobe():
         "barfota":{"vattentät":False, "värme":"hot"}
     }
     jackor = {
-        "kappa":{"vattentät":False, "värme":"cold"},
+        "kappa":{"vattentät":True, "värme":"cold"},
         "läderjacka":{"vattentät":False, "värme":"hot"},
-        "regnjacka":{"vattentät":True, "värme":"cold"}
-        "kofta":{"vattentät":False, "värme":"hot"}
-        "läderjacka":{"vattentät":False, "värme":"cold"}
+        "regnjacka":{"vattentät":True, "värme":"hot"},
+        "kofta":{"vattentät":False, "värme":"hot"},
+        "väst":{"vattentät":False, "värme":"cold"}
     }
 
-    listaTröjor = ["tshirt", "hoodie"]
+    listaTröjor = ["tshirt", "hoodie", "linne", "croptop"]
     listaByxor = ["byxor","finbyxor","shorts","galonisar"]
     listaSkor = ["stövlar","pumps","sneakers", "barfota"] 
-    listaJackor = ["kappa", "läderjacka", "regnjacka", "kofta", "läderjacka"]   
+    listaJackor = ["kappa", "läderjacka", "regnjacka", "kofta", "väst"]   
 
     vattentätQuiz, värmeQuiz, jackaQuiz = quiz()
     
@@ -82,17 +82,20 @@ def wardrobe():
     cleanup(listaByxor, byxor, vattentätQuiz, värmeQuiz)
     cleanup(listaSkor, skor, vattentätQuiz, värmeQuiz)
     if jackaQuiz == True:
-        cleanup(listaJacka)
+        cleanup(listaJackor, jackor, vattentätQuiz, värmeQuiz)
+        jacka = generator(listaJackor)
+    else: jacka = "Ingen jacka"
 
-    return generator(listaTröjor), generator(listaByxor), generator(listaSkor)
+
+    return generator(listaTröjor), generator(listaByxor), generator(listaSkor), jacka
     
 
 def menu():
     while True:
         menuChoice = input("Välj ett alternativ:\ng) Generera en outfit \na) Avsluta \n ")
         if menuChoice == "g":
-            tröja, byxa, sko = wardrobe()
-            print(f"Här är din outfit:\n {tröja}\n {byxa} \n {sko}")
+            tröja, byxa, sko, jacka = wardrobe()
+            print(f"Här är din outfit:\n {tröja}\n {byxa} \n {sko}\n {jacka}")
         if menuChoice == "a":
             exit()
             return False
