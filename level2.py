@@ -8,11 +8,11 @@ def editor(lista, dictionary):
         plagg = lista[userChoice-1] 
             
     else:
-        answer = input("Det finns inga andra tillgängliga alternativ som passar dina krav, vill du välja mellan alla tillgängliga plagg? \n(j)a \n(n)ej")
+        answer = input("Det finns inga andra alternativ som passar dina krav. \n\nVill du välja mellan alla tillgängliga plagg? \nj) Ja \nn) Nej\n")
         if answer == "j":
             lista = list(dictionary.keys())
             for n in range(0, len(lista)):
-                print(n+1,")", lista[n])
+                print(str(n+1)+")", lista[n])
             userChoice = int(input("Vilket alternativ?\n"))
             plagg = lista[userChoice-1] 
     return plagg
@@ -32,19 +32,22 @@ def cleanup(lista, dictionary, vattentätQuiz, värmeQuiz):
             lista.remove(item)
 
 def quiz():
-    svar = input("Ska outfiten vara vattentät? (j)a/(n)ej")
+    print("------------------------------------")
+    svar = input("Regnar det? \n\nj) Vattentät \nn) Ej vattentät\n")
     if svar == "j":
         vattentät = True
     elif svar == "n":
         vattentät = False
     
-    svar = input("Vilken värme ska outfiten vara anpassad för? (h)ot/(c)old")
+    print("------------------------------------")
+    svar = input("Vilken värme ska outfiten vara anpassad för? \n\nh) Hot\nc) Cold\n")
     if svar == "h":
         värme = "hot"
     elif svar == "c":
         värme = "cold"
     
-    svar = input("Vill du ha en jacka? (j)a/(n)ej")
+    print("------------------------------------")
+    svar = input("Vill du ha en jacka? \n\nj) Ja\nn) Nej\n")
     if svar == "j":
         jacka = True
     elif svar == "n":
@@ -59,22 +62,26 @@ def randomizer(lista):
         choosen = lista[index]
     elif len(lista) == 1:
         choosen = lista[0]
-    else: choosen = "[Finns inget matchande plagg i databasen]"
+    else: choosen = "Tom"
     return choosen
 
 
 def outfit_generator():
     tröjor = {
-        "tshirt":{"vattentät":False, "värme":"hot"},
+        "stickad tröja":{"vattentät":False, "värme":"hot"},
+        "långärmad":{"vattentät":False, "värme":"hot"},
         "hoodie":{"vattentät":False, "värme":"cold"},
+        "bikinitopp":{"vattentät":True, "värme":"hot"},
         "linne":{"vattentät":False, "värme":"hot"},
         "croptop":{"vattentät":False, "värme":"hot"},
         "soppåse":{"vattentät":True, "värme":"hot"},
         "tjock soppåse":{"vattentät":True, "värme":"cold"}
      }
     byxor = {
-        "byxor":{"vattentät":False, "värme":"cold"},
-        "finbyxor": {"vattentät":False, "värme":"hot"},
+        "jeans":{"vattentät":False, "värme":"cold"},
+        "kostymbyxor": {"vattentät":False, "värme":"hot"},
+        "leggings":{"vattentät":False, "värme":"hot"},
+        "bikinitrosor":{"vattentät":True, "värme":"hot"},
         "shorts":{"vattentät":False, "värme":"hot"},
         "galonisar":{"vattentät":True, "värme":"hot"},
         "täckbyxor":{"vattentät":True, "värme":"cold"},
@@ -86,7 +93,7 @@ def outfit_generator():
         "pumps":{"vattentät":False, "värme":"hot"},
         "sneakers":{"vattentät":False, "värme":"hot"},
         "barfota":{"vattentät":False, "värme":"hot"},
-        "flipflops":{"vattentät":False, "värme":"hot"},
+        "flipflops":{"vattentät":True, "värme":"hot"},
         "crocs":{"vattentät":False, "värme":"hot"},
         "uggs":{"vattentät":False, "värme":"cold"},
         "vandringskängor":{"vattentät":True, "värme":"cold"}
@@ -100,10 +107,10 @@ def outfit_generator():
         "regnponcho":{"vattentät":True, "värme":"hot"}
     }
 
-    listaTröjor = ["tshirt", "hoodie", "linne", "croptop"]
-    listaByxor = ["byxor","finbyxor","shorts","galonisar"]
-    listaSkor = ["stövlar","pumps","sneakers", "barfota"] 
-    listaJackor = ["kappa", "läderjacka", "regnjacka", "kofta", "väst"]   
+    listaTröjor = ["stickad tröja", "långärmad", "hoodie", "bikinitopp", "linne", "croptop", "soppåse", "tjock soppåse"]
+    listaByxor = ["jeans", "kostymbyxor", "leggings", "bikinitrosor", "shorts", "galonisar", "täckbyxor", "kort kjol", "lång kjol"]
+    listaSkor = ["stövlar","pumps","sneakers", "barfota", "flipflops", "crocs", "uggs", "vandringskängor"] 
+    listaJackor = ["kappa", "läderjacka", "regnjacka", "kofta", "väst", "regnponcho"]   
 
     vattentätQuiz, värmeQuiz, jackaQuiz = quiz()
     
@@ -120,11 +127,11 @@ def outfit_generator():
     tröja = randomizer(listaTröjor)
     byxa = randomizer(listaByxor)
     sko = randomizer(listaSkor)
-
-    print(f"Här är din outfit:\n {tröja}\n {byxa} \n {sko}\n {jacka}")
-
+    print("--------------")
+    print(f"Här är din outfit:\n Topp:{tröja}\n\n Byxor:{byxa}\n\n Skor:{sko}\n\n Jacka:{jacka}")
+    print("--------------")
     
-    userEdit = input("Vill du göra ändringar till outfiten? \n(j)a/(n)ej")
+    userEdit = input("Vill du göra ändringar till outfiten? \n\nj) Ja\nn) Nej")
     while True:
         if userEdit == "j":
             userItem = input("Vilket plagg vill du ändra?\nt)tröja \nb)byxor \ns)skor \nj)jacka\n")
@@ -136,20 +143,23 @@ def outfit_generator():
                 sko = editor(listaSkor, skor)
             elif userItem == "j":
                 jacka = editor(listaJackor, jackor)
-        print(f"Här är din reviderade outfit:\n {tröja}\n {byxa} \n {sko}\n {jacka}")
-        userMood = input("Vill du göra fler ändringar? \n(j)a/(n)ej")
+        print("--------------")
+        print(f"Här är din outfit:\n Topp:{tröja}\n\n Byxor:{byxa}\n\n Skor:{sko}\n\n Jacka:{jacka}")
+        print("--------------")
+        userMood = input("Vill du göra fler ändringar? \n\nj) Ja\nn) Nej")
         if userMood == "j":
             continue
         if userMood == "n":
             return False
-    
-    print(f"Här är din outfit:\n {tröja}\n {byxa} \n {sko}\n {jacka}")
+    print("--------------")
+    print(f"Här är din outfit:\n Topp:{tröja}\n\n Byxor:{byxa}\n\n Skor:{sko}\n\n Jacka:{jacka}")
+    print("--------------")
 
     
 
 def menu():
     while True:
-        menuChoice = input("Välj ett alternativ:\ng) Generera en outfit \na) Avsluta \n ")
+        menuChoice = input("Välj ett alternativ:\n\ng) Generera en outfit \na) Avsluta \n ")
         if menuChoice == "g":
             outfit_generator()
 
@@ -158,7 +168,9 @@ def menu():
             return False
 
 def main():
-    print("Välkommen till outfitgeneratorn!")
+    print("------------------------------------")
+    print("\n  Välkommen till outfitgeneratorn!\n")
+    print("------------------------------------")
     menu()
 
 main()
