@@ -17,8 +17,6 @@ def editor(lista, dictionary):
             plagg = lista[userChoice-1] 
     return plagg
             
-        
-
 def cleanup(lista, dictionary, vattentätQuiz, värmeQuiz):
     
     for x in range(len(lista)-1, -1, -1):
@@ -123,7 +121,6 @@ def outfit_generator():
         jacka = randomizer(listaJackor)
     else: jacka = "Ingen jacka"
 
-
     tröja = randomizer(listaTröjor)
     byxa = randomizer(listaByxor)
     sko = randomizer(listaSkor)
@@ -132,9 +129,8 @@ def outfit_generator():
     print("--------------")
     
     userEdit = input("Vill du göra ändringar till outfiten? \n\nj) Ja\nn) Nej")
-    while True:
-        if userEdit == "j":
-            
+    if userEdit == "j":
+        while True:
             userItem = input("Vilket plagg vill du ändra?\nt)tröja \nb)byxor \ns)skor \nj)jacka\n")
             if userItem == "t":
                 tröja = editor(listaTröjor, tröjor)
@@ -144,17 +140,15 @@ def outfit_generator():
                 sko = editor(listaSkor, skor)
             elif userItem == "j":
                 jacka = editor(listaJackor, jackor)
-        print("--------------")
-        print(f"Här är din outfit:\n Topp:{tröja}\n\n Byxor:{byxa}\n\n Skor:{sko}\n\n Jacka:{jacka}")
-        print("--------------")
-        userMood = input("Vill du göra fler ändringar? \n\nj) Ja\nn) Nej\n")
-        if userMood == "j":
-            continue
-        if userMood == "n":
-            return False
-    print("--------------")
-    print(f"Här är din outfit:\n Topp:{tröja}\n\n Byxor:{byxa}\n\n Skor:{sko}\n\n Jacka:{jacka}")
-    print("--------------")
+            print("--------------")
+            print(f"Här är din outfit:\n Topp:{tröja}\n\n Byxor:{byxa}\n\n Skor:{sko}\n\n Jacka:{jacka}")
+            print("--------------")
+            userMood = input("Vill du göra fler ändringar? \n\nj) Ja\nn) Nej\n")
+            if userMood == "j":
+                continue
+            if userMood == "n":
+                return False
+
 
     
 
