@@ -222,7 +222,7 @@ def outfit_generator(savedOutfits, shirtsDict, pantsDict, shoesDict, jacketsDict
     if userSave == 1:
         save_outfit(savedOutfits, outfit)
 
-def menu(): #Skinny
+def menu():
     savedOutfits = {"slayer":["linne", "jeans", "crocs", "väst"]}
     shirtsDict, pantsDict, shoesDict, jacketsDict, shirtsList, pantsList, shoesList, jacketsList = initiate_clothes()
     while True:
@@ -236,7 +236,7 @@ def menu(): #Skinny
         elif menuChoice == 4:
             return False
 
-def main(): #Skinny
+def main():
     print("------------------------------------")
     print("\n  Välkommen till outfitgeneratorn!\n")
     print("------------------------------------")
