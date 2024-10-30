@@ -28,8 +28,7 @@ def initiate_clothes():
         "bikinitopp":{"waterproof":True, "season":"hot"},
         "linne":{"waterproof":False, "season":"hot"},
         "croptop":{"waterproof":False, "season":"hot"},
-        "soppåse":{"waterproof":True, "season":"hot"},
-        "tjock soppåse":{"waterproof":True, "season":"cold"}
+        "randig sweater":{"waterproof":True, "season":"cold"}
      }
     pantsDict = {
         "jeans":{"waterproof":False, "season":"cold"},
@@ -61,7 +60,7 @@ def initiate_clothes():
         "regnponcho":{"waterproof":True, "season":"hot"}
     }
 
-    shirtsList = ["stickad tröja", "långärmad", "hoodie", "bikinitopp", "linne", "croptop", "soppåse", "tjock soppåse"]
+    shirtsList = ["stickad tröja", "långärmad", "hoodie", "bikinitopp", "linne", "croptop", "randig sweater"]
     pantsList = ["jeans", "kostymbyxor", "leggings", "bikinitrosor", "shorts", "galonisar", "täckbyxor", "kort kjol", "lång kjol"]
     shoesList = ["stövlar","pumps","sneakers", "barfota", "flipflops", "crocs", "uggs", "vandringskängor"] 
     jacketsList = ["kappa", "läderjacka", "regnjacka", "kofta", "väst", "regnponcho"]
@@ -203,14 +202,6 @@ def outfit_generator(savedOutfits, shirtsDict, pantsDict, shoesDict, jacketsDict
 
     if jacketQuiz == False:
         outfit[3] = "Ingen jacka"
-    
-    # if jacketQuiz == True:
-    #     tempJacket = cleanup(jacketsList, jacketsDict, waterproofQuiz, seasonQuiz)
-    #     tempListList.append(tempJacket)
-    #     jacket = randomizer(tempJacket)
-    # else: jacket = "Ingen jacka"
-    # outfit.append(jacket)
-
 
     print("------------------------------------")
     print(f"Här är din outfit:\n Topp:{outfit[0]}\n\n Byxor:{outfit[1]}\n\n Skor:{outfit[2]}\n\n Jacka:{outfit[3]}")
