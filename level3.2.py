@@ -22,8 +22,8 @@ def two_options_quiz(question, condition1, condition2):
 
 def initiate_clothes():
     shirtsDict = {
-        "stickad tröja":{"waterproof":False, "season":"hot"},
-        "långärmad":{"waterproof":False, "season":"hot"},
+        "stickad tröja":{"waterproof":False, "season":"cold"},
+        "långärmad":{"waterproof":False, "season":"cold"},
         "hoodie":{"waterproof":False, "season":"cold"},
         "bikinitopp":{"waterproof":True, "season":"hot"},
         "linne":{"waterproof":False, "season":"hot"},
@@ -54,7 +54,7 @@ def initiate_clothes():
     }
     jacketsDict = {
         "kappa":{"waterproof":True, "season":"cold"},
-        "läderjacka":{"waterproof":False, "season":"hot"},
+        "läderjacka":{"waterproof":False, "season":"cold"},
         "regnjacka":{"waterproof":True, "season":"hot"},
         "kofta":{"waterproof":False, "season":"hot"},
         "väst":{"waterproof":False, "season":"cold"},
@@ -123,16 +123,18 @@ def save_outfit(savedOutfitsDict,listOfClothes):
         else: break
     savedOutfitsDict.update({outfitName:listOfClothes})
     print(f"Outfiten '{outfitName}' är nu sparad i din garderob.")
-    print("--------------")
+    print("------------------------------------")
 
 def view_outfits(savedOutfits):
     outfitKeys = ["Tröja: ", "Byxor: ", "Skor: ", "Kappa: "]
-    print("Här är alla dina outfits:")
+    print("------------------------------------")
+    print("Här är alla dina sparade outfits:")
     outfit = lister(savedOutfits,"Välj outfit: \n")
     outfitList = savedOutfits.get(outfit)
     
     for n in range(0,4):
         print(outfitKeys[n]+outfitList[n])
+    input("------------------------------------")
 
 #________________ Outfit Generator _____________________
           
@@ -182,37 +184,40 @@ def outfit_generator(savedOutfits, shirtsDict, pantsDict, shoesDict, jacketsDict
     outfit = []
     tempListList = []
     
-    for n in range(0,3):
+    for n in range(0,4):
         tempList = cleanup(clothingList[n], dictionaryList[n], waterproofQuiz, seasonQuiz)
         tempListList.append(tempList)
         plagg = randomizer(tempList)
         outfit.append(plagg)
 
-    if jacketQuiz == True:
-        tempJacket = cleanup(jacketsList, jacketsDict, waterproofQuiz, seasonQuiz)
-        tempListList.append(tempJacket)
-        jacket = randomizer(tempJacket)
-    else: jacket = "Ingen jacka"
-    outfit.append(jacket)
+    if jacketQuiz == False:
+        outfit[3] = "Ingen jacka"
+    
+    # if jacketQuiz == True:
+    #     tempJacket = cleanup(jacketsList, jacketsDict, waterproofQuiz, seasonQuiz)
+    #     tempListList.append(tempJacket)
+    #     jacket = randomizer(tempJacket)
+    # else: jacket = "Ingen jacka"
+    # outfit.append(jacket)
 
 
-    print("--------------")
+    print("------------------------------------")
     print(f"Här är din outfit:\n Topp:{outfit[0]}\n\n Byxor:{outfit[1]}\n\n Skor:{outfit[2]}\n\n Jacka:{outfit[3]}")
-    print("--------------")
+    print("------------------------------------")
     
     #______Edit created outfit:
     
     userEdit = int(input("Vill du göra ändringar till outfiten? \n\n1)Ja \n2)Nej\n"))
-    print("--------------")
+    print("------------------------------------")
     if userEdit == 1:
         while True:
             userItem = int(input("Vilket plagg vill du ändra?\n1)tröja \n2)byxor \n3)skor \n4)jacka\n"))
             userItem -= 1 #index
             outfit[userItem] = editor(tempListList[userItem], dictionaryList[userItem]) #editor(sorteradLista, dictionary)
             
-            print("--------------")
+            print("------------------------------------")
             print(f"Här är din outfit:\n Topp:{outfit[0]}\n\n Byxor:{outfit[1]}\n\n Skor:{outfit[2]}\n\n Jacka:{outfit[3]}")
-            print("--------------")
+            print("------------------------------------")
             userMood = int(input("Vill du göra fler ändringar? \n\n1)Ja \n2)Nej \n"))
             if userMood == 1:
                 continue
@@ -226,7 +231,7 @@ def menu():
     savedOutfits = {"slayer":["linne", "jeans", "crocs", "väst"]}
     shirtsDict, pantsDict, shoesDict, jacketsDict, shirtsList, pantsList, shoesList, jacketsList = initiate_clothes()
     while True:
-        menuChoice = int(input("Välj ett alternativ:\n\n1)Generera en outfit  \n2)Visa sparade outfits \n3)Öppna garderob \n4)Avsluta\n"))
+        menuChoice = int(input("Huvudmeny:\n\n1)Generera en outfit  \n2)Visa sparade outfits \n3)Öppna garderob \n4)Avsluta\n"))
         if menuChoice == 1:
             outfit_generator(savedOutfits, shirtsDict, pantsDict, shoesDict, jacketsDict, shirtsList, pantsList, shoesList, jacketsList)
         elif menuChoice == 2:
